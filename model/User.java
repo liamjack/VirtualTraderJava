@@ -10,12 +10,42 @@ package model;
  * @author cuonic
  */
 public class User {
+    
     private String username;
     private String password;
     
-    public User(String username, String password) throws Exception {
+    private String firstName;
+    private String lastName;
+    
+    private float money;
+    
+    private Sex sex;
+    private Country country;
+      
+    
+    public User(String username, String password, String firstName, String lastName, Sex sex, Country country) throws Exception {
         setUsername(username);
         setPassword(password);
+        
+        setFirstName(firstName);
+        setLastName(lastName);
+        
+        setSex(sex);
+        setCountry(country);
+        
+        setMoney(1000);
+    }
+    
+    private void setFirstName(String firstName) throws Exception {
+        if(validateName(firstName)) {
+            this.firstName = firstName;
+        }
+    }
+    
+    private void setLastName(String lastName) throws Exception {
+        if(validateName(lastName)) {
+            this.lastName = lastName;
+        }
     }
     
     private void setPassword(String password) throws Exception {
@@ -28,6 +58,18 @@ public class User {
         if(validateUsername(username)) {
             this.username = username;
         }
+    }
+    
+    private void setMoney(float money) {
+        this.money = money;
+    }
+    
+    private void setSex(Sex sex) {
+        this.sex = sex;
+    }
+    
+    private void setCountry(Country country) {
+        this.country = country;
     }
     
     private Boolean validatePassword(String password) throws Exception {
@@ -50,8 +92,40 @@ public class User {
         return true;
     }
     
+    private Boolean validateName(String name) throws Exception {
+        if(name.length() < 3) {
+            throw new Exception("Nom trop court.");
+        }
+        
+        if(name.length() > 30) {
+            throw new Exception("Nom trop long.");
+        }
+        
+        return true;
+    }
+    
     public String getUsername() {
         return this.username;
+    }
+    
+    public float getMoney() {
+        return this.money;
+    }
+    
+    public String getFirstName() {
+        return this.firstName;
+    }
+    
+    public String getLastName() {
+        return this.lastName;
+    }
+    
+    public Sex getSex() {
+        return this.sex;
+    }
+    
+    public Country getCountry() {
+        return this.country;
     }
     
     public Boolean verifyPassword(String password) throws Exception {
